@@ -1,0 +1,2 @@
+[functions."your_function_name"]
+  timeout = 25
