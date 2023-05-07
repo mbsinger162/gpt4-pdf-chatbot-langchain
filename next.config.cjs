@@ -1,3 +1,15 @@
+module.exports = {
+  future: {
+    webpack5: true,
+  },
+  webpack: (config) => {
+    config.experiments = {
+      topLevelAwait: true,
+    };
+    return config;
+  },
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
