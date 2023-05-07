@@ -181,7 +181,7 @@ async function handleSubmit(e: any) {
                           </ReactMarkdown>
                         </div>
                       </div>
-                      {message.type === 'apiMessage' && message.imageUrl && (
+                    {message.type === 'apiMessage' && message.imageUrl && message.imageSource (
                       <div key={`chatMessageImage-${index}`} className="mx-auto my-2">
                         <img
                           src={message.imageUrl}
