@@ -33,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       res.status(404).json({ error: 'No image found' });
     }
-  } catch (error: any) { // Add "any" type assertion here
+  } catch (error: any) {
     console.error('Error fetching image:', error);
     if (error.response) {
       console.error('Error response data:', error.response.data);
