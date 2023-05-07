@@ -34,13 +34,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(404).json({ error: 'No image found' });
     }
   } catch (error: any) {
-    console.error('Error fetching image:', error);
-    if (error.response) {
-      console.error('Error response data:', error.response.data);
-      console.error('Error response status:', error.response.status);
-      console.error('Error response headers:', error.response.headers);
-    }
-    res.status(500).json({ error: 'Error fetching image' });
+    console.log('error', error);
+    res.status(500).json({ error: error.message || 'Something went wrong' });
   }
 };
 
