@@ -1,6 +1,3 @@
-[build]
-  functions = "functions"
-
-[functions]
-  directory = "functions"
+[[functions]]
+  name = "ConversationalRetrievalQAChain.fromLLM"
   timeout = 26
