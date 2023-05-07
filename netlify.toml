@@ -1,3 +1,0 @@
-[[functions]]
-  name = "ConversationalRetrievalQAChain.fromLLM"
-  timeout = 26
