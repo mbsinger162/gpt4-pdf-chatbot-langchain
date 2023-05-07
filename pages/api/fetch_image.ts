@@ -37,6 +37,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const anyError = error as any;
     console.error('Error fetching image:', anyError);
     if (anyError.response) {
+      console.error('Error response data:', error.response.data);
+      console.error('Error response status:', error.response.status);
+      console.error('Error response headers:', error.response.headers);
+    }
+    res.status(500).json({ error: 'Error fetching image' });
+  }
 };
 
 export default handler;
