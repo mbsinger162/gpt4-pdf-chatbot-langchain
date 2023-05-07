@@ -13,8 +13,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await axios.get("https://www.googleapis.com/customsearch/v1", {
       params: {
-        key: 'AIzaSyC1cUofUl8FsbX9bTzotrCNMIF15rgv1cQ',
-        cx: 'e3f46958212d64d6f',
+        key: process.env.GOOGLE_API_KEY,
+        cx: process.env.CUSTOM_SEARCH_ENGINE_ID,
         searchType: 'image',
         q: query,
       },
