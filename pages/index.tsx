@@ -96,25 +96,7 @@ async function handleSubmit(e: any) {
     if (data.error) {
       setError(data.error);
        } else {
-    // } else {
-    //   // Fetch image after receiving the response
-    //   const searchTermsResponse = await fetch('/api/get_search_terms', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       chatResponse: data.text,
-    //     }),
-    //   });
-    //   const searchTermsData: { searchTerms?: string } = await searchTermsResponse.json();
-    //   const searchTerms = searchTermsData.searchTerms;
-      
-    //   // Fetch image using the search terms
-    //   const imageResponse = await fetch(`/api/fetch_image?query=${encodeURIComponent(searchTerms || '')}`);
-    //   const imageData: { imageUrl?: string; imageSource?: string } = await imageResponse.json();
-    //   const imageUrl = imageData.imageUrl;
-    //   const imageSource = imageData.imageSource;
+
 
       setMessageState((state) => ({
         ...state,
@@ -124,8 +106,6 @@ async function handleSubmit(e: any) {
             type: 'apiMessage',
             message: data.text,
             sourceDocs: data.sourceDocuments,
-            // imageUrl, // Store the fetched image URL in the message state
-            // imageSource, // Store the fetched image source in the message state
           },
         ],
         history: [...state.history, [question, data.text]],
