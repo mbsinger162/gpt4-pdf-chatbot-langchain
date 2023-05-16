@@ -13,6 +13,16 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
+function extractFileName(path) {
+  // Extract the file name with the extension
+  const fileNameWithExtension = path.split('/').pop();
+
+  // Remove the file extension
+  const fileNameWithoutExtension = fileNameWithExtension.split('.').slice(0, -1).join('.');
+
+  return fileNameWithoutExtension;
+}
+
 export default function Home() {
   const [query, setQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -85,7 +95,20 @@ async function handleSubmit(e: any) {
       setError(data.error);
     } else {
       // Fetch image after receiving the response
-      const imageResponse = await fetch(`/api/fetch_image?query=${encodeURIComponent(query)}`);
+      const searchTermsResponse = await fetch('/api/get_search_terms', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chatResponse: data.text,
+        }),
+      });
+      const searchTermsData: { searchTerms?: string } = await searchTermsResponse.json();
+      const searchTerms = searchTermsData.searchTerms;
+      
+      // Fetch image using the search terms
+      const imageResponse = await fetch(`/api/fetch_image?query=${encodeURIComponent(searchTerms)}`);
       const imageData: { imageUrl?: string; imageSource?: string } = await imageResponse.json();
       const imageUrl = imageData.imageUrl;
       const imageSource = imageData.imageSource;
@@ -181,7 +204,7 @@ async function handleSubmit(e: any) {
                           </ReactMarkdown>
                         </div>
                       </div>
-                    {/* {message.type === 'apiMessage' && message.imageUrl && message.imageSource (
+                    {/* {message.type === 'apiMessage' && message.imageUrl && (
                       <div key={`chatMessageImage-${index}`} className="mx-auto my-2">
                         <img
                           src={message.imageUrl}
@@ -213,7 +236,7 @@ async function handleSubmit(e: any) {
                                       {doc.pageContent}
                                     </ReactMarkdown>
                                     <p className="mt-2">
-                                      <b>Source:</b> {doc.metadata.source}
+                                      <b>Source:</b> {extractFileName(doc.metadata.source)}
                                     </p>
                                   </AccordionContent>
                                 </AccordionItem>
@@ -237,7 +260,7 @@ async function handleSubmit(e: any) {
                     ref={textAreaRef}
                     autoFocus={false}
                     rows={1}
-                    maxLength={512}
+                    maxLength={2000}
                     id="userInput"
                     name="userInput"
                     placeholder={
@@ -280,7 +303,9 @@ async function handleSubmit(e: any) {
         </div>
         <footer className="m-auto p-4">
           <a>
-            Powered by LangChainAI.
+            Powered by GPT-4 and LangChainAI | Built by Mac Singer, MD
+          {/* <br></br>
+            Built by <a href="https://www.linkedin.com/in/mac-singer-a11908111/"> Mac Singer, MD </a> */}
           </a>
         </footer>
       </Layout>
@@ -288,4 +313,3 @@ async function handleSubmit(e: any) {
   );
 }
 
-   

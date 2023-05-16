@@ -5,4 +5,7 @@ export type Message = {
   message: string;
   isStreaming?: boolean;
   sourceDocs?: Document[];
+  imageUrl?: string; // Add this line
+  imageSource?: string; // Add this line
 };
+
