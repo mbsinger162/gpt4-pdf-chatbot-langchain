@@ -15,13 +15,14 @@ import {
 
 function extractFileName(path: string) {
   // Extract the file name with the extension
-  const fileNameWithExtension = path.split('/').pop();
+  const fileNameWithExtension = path.split('/').pop() || '';
 
   // Remove the file extension
   const fileNameWithoutExtension = fileNameWithExtension.split('.').slice(0, -1).join('.');
 
   return fileNameWithoutExtension;
 }
+
 
 
 export default function Home() {
