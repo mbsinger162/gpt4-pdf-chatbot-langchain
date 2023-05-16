@@ -13,7 +13,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-function extractFileName(path) {
+function extractFileName(path: string) {
   // Extract the file name with the extension
   const fileNameWithExtension = path.split('/').pop();
 
@@ -22,6 +22,7 @@ function extractFileName(path) {
 
   return fileNameWithoutExtension;
 }
+
 
 export default function Home() {
   const [query, setQuery] = useState<string>('');
