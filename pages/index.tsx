@@ -110,7 +110,7 @@ async function handleSubmit(e: any) {
       const searchTerms = searchTermsData.searchTerms;
       
       // Fetch image using the search terms
-      const imageResponse = await fetch(`/api/fetch_image?query=${encodeURIComponent(searchTerms)}`);
+      const imageResponse = await fetch(`/api/fetch_image?query=${encodeURIComponent(searchTerms || '')}`);
       const imageData: { imageUrl?: string; imageSource?: string } = await imageResponse.json();
       const imageUrl = imageData.imageUrl;
       const imageSource = imageData.imageSource;
