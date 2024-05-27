@@ -50,6 +50,7 @@
 //   console.log('ingestion complete');
 // })();
 
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { pineconeIndex } from '@/utils/pinecone-client';
@@ -72,7 +73,7 @@ export const run = async () => {
 
     /* Split text into chunks */
     const textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 3000,
+      chunkSize: 1000,
       chunkOverlap: 200,
     });
 
@@ -86,8 +87,8 @@ export const run = async () => {
     //embed the PDF documents
     await PineconeStore.fromDocuments(docs, embeddings, {
       pineconeIndex: pineconeIndex,
-      textKey: 'text',
       namespace: PINECONE_NAME_SPACE,
+      textKey: 'text',
     });
   } catch (error) {
     console.log('error', error);
