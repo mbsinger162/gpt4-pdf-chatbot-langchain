@@ -24,8 +24,8 @@
 
 import { PineconeClient } from '@pinecone-database/pinecone';
 
-if (!process.env.PINECONE_ENVIRONMENT || !process.env.PINECONE_API_KEY) {
-  throw new Error('Pinecone environment or api key vars missing');
+if (!process.env.PINECONE_ENVIRONMENT || !process.env.PINECONE_API_KEY || !process.env.PINECONE_INDEX_NAME) {
+  throw new Error('Pinecone environment, API key, or index name vars missing');
 }
 
 async function initPinecone() {
@@ -37,11 +37,13 @@ async function initPinecone() {
       apiKey: process.env.PINECONE_API_KEY ?? '',
     });
 
-    return pinecone;
+    const index = pinecone.Index(process.env.PINECONE_INDEX_NAME);
+
+    return index;
   } catch (error) {
     console.log('error', error);
     throw new Error('Failed to initialize Pinecone Client');
   }
 }
 
-export const pinecone = await initPinecone();
+export const pineconeIndex = await initPinecone();
