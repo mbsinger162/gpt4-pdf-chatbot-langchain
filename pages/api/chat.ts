@@ -53,4 +53,3 @@ export default async function handler(
     res.status(500).json({ error: error.message || 'Something went wrong' });
   }
 }
-
