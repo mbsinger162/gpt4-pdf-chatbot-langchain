@@ -37,7 +37,7 @@ async function initPinecone() {
       apiKey: process.env.PINECONE_API_KEY ?? '',
     });
 
-    const index = pinecone.Index(process.env.PINECONE_INDEX_NAME);
+    const index = pinecone.Index('aeyeconsult-serverless');
 
     return index;
   } catch (error) {
